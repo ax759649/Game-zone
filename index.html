@@ -1,326 +1,168 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Game Zone — Contas Blox Fruits</title>
-  <style>
-    :root{
-      --bg:#030617;
-      --panel:#071328;
-      --card:#0c1724;
-      --accent:#0077ff;
-      --accent-2:#00bfff;
-      --muted:#9fb3c9;
-      --glass: rgba(255,255,255,0.03);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Inter, Poppins, Arial, sans-serif;
-      background: linear-gradient(180deg,#020417 0%, #071026 100%);
-      color:#e6f4ff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-    a{color:inherit;text-decoration:none}
-    /* header */
-    header.site-header{
-      background: linear-gradient(90deg,var(--accent), #00243a);
-      padding:14px 18px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      justify-content:space-between;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.6);
-      position:sticky;
-      top:0;
-      z-index:40;
-    }
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{
-      width:52px;height:52px;border-radius:10px;
-      background:linear-gradient(135deg,var(--accent-2),#004e8c);
-      display:flex;align-items:center;justify-content:center;font-weight:800;color:#001;
-      box-shadow:0 8px 28px rgba(0,116,217,0.18);font-size:18px;
-    }
-    .brand h1{margin:0;font-size:18px}
-    .brand p{margin:0;color:var(--muted);font-size:12px}
-    nav.actions{display:flex;gap:10px;align-items:center}
-    .icon-btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
-    /* hero */
-    .hero{
-      max-width:1200px;margin:18px auto;padding:28px;border-radius:12px;
-      background:linear-gradient(180deg, rgba(0,119,255,0.06), rgba(0,0,0,0.0));
-      display:flex;gap:18px;align-items:center;justify-content:space-between;
-    }
-    .hero .left{flex:1}
-    .hero h2{margin:0;font-size:26px;color:var(--accent-2)}
-    .hero p{color:var(--muted);margin-top:8px}
-    .cta .primary{background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;font-weight:800;border:0}
-    /* layout */
-    .wrap{max-width:1100px;margin:18px auto;padding:0 18px}
-    .controls{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px}
-    .search{flex:1;min-width:200px;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:var(--glass);color:var(--muted)}
-    .filters{display:flex;gap:8px}
-    .chip{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:var(--muted);cursor:pointer}
-    .chip.active{background:linear-gradient(90deg,var(--accent),#005fbd);color:#fff;border:0}
-    /* products */
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.6);transition:transform .18s, box-shadow .18s}
-    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,116,217,0.12)}
-    .thumb{width:100%;height:160px;object-fit:cover;background:#09202e;display:block}
-    .card-body{padding:12px}
-    .card h3{margin:8px 0 6px;color:var(--accent-2);font-size:18px}
-    .card p{margin:0;color:var(--muted);font-size:13px;min-height:38px}
-    .meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-    .price{font-weight:800;color:#8ef}
-    .btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
-    .btn.inst{background:linear-gradient(90deg,#833ab4,#fd1d1d,#fcb045);color:#fff}
-    .btn.info{background:linear-gradient(90deg,#1b1f25,#3a3f46);color:#dfe;border:1px solid rgba(255,255,255,0.02)}
-    /* modal */
-    .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:90;padding:20px}
-    .modal{max-width:900px;width:100%;background:linear-gradient(180deg,#071226,#041025);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.04)}
-    .modal .left{float:left;width:45%;padding-right:12px}
-    .modal .right{float:right;width:55%}
-    .modal img{width:100%;border-radius:8px}
-    .close{background:transparent;border:0;color:var(--muted);font-weight:800;cursor:pointer;float:right}
-    /* cart quick */
-    .cart{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--accent),#005fbd);color:#fff;padding:12px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.6);z-index:80;cursor:pointer}
-    footer{margin-top:40px;padding:20px;text-align:center;color:var(--muted);font-size:13px}
-    @media(max-width:880px){
-      .modal .left,.modal .right{float:none;width:100%}
-      .thumb{height:180px}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Game Zone — Contas Blox Fruits</title>
+<style>
+:root{--bg:#030617;--accent:#0077ff;--accent2:#00bfff;--muted:#9fb3c9}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(180deg,#020417,#071026);color:#e6f4ff}
+.header{background:linear-gradient(90deg,var(--accent),#00243a);padding:18px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent2),#004e8c);display:flex;align-items:center;justify-content:center;color:#001;font-weight:800}
+.container{max-width:1100px;margin:18px auto;padding:0 18px}
+.hero{background:linear-gradient(180deg, rgba(0,119,255,0.06), transparent);padding:22px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.search{width:100%;padding:12px 14px;border-radius:10px;border:none;background:rgba(255,255,255,0.03);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+.card img{width:100%;height:180px;object-fit:cover}
+.card .info{padding:12px} .card h3{margin:6px 0;color:var(--accent2)} .card p{color:var(--muted);font-size:14px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px}
+.btn{padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+.btn.ig{background:linear-gradient(90deg,#833ab4,#fd1d1d,#fcb045);color:#fff}
+.footer{text-align:center;padding:20px;color:var(--muted);margin-top:28px}
+@media(max-width:680px){.hero{flex-direction:column;align-items:flex-start}}
+</style>
 </head>
 <body>
-  <!-- header -->
-  <header class="site-header">
-    <div class="brand">
-      <div class="logo">GZ</div>
-      <div>
-        <h1>Game Zone</h1>
-        <p style="margin-top:4px;font-size:12px;color:rgba(255,255,255,0.9)">Contas Blox Fruits • Vendas via Instagram Direct</p>
-      </div>
+<header class="header">
+  <div class="brand"><div class="logo">GZ</div><div><h1 style="margin:0">Game Zone</h1><div style="color:var(--muted);font-size:13px">Contas Blox Fruits • Vendas por Instagram Direct</div></div></div>
+  <div><a href="https://www.instagram.com/gamezone2897" style="color:#fff;text-decoration:none">@gamezone2897</a></div>
+</header>
+<main class="container">
+  <div class="hero">
+    <div>
+      <h2 style="margin:0;color:var(--accent2)">As melhores contas de Blox Fruits do Brasil</h2>
+      <p style="margin:8px 0;color:var(--muted)">Contas selecionadas, com God Human, CDK, Shark Anchor e muito mais. Clique em "Falar no Instagram" para comprar.</p>
     </div>
-
-    <nav class="actions">
-      <div class="icon-btn" id="show-cart">Carrinho (<span id="cart-count">0</span>)</div>
-      <a class="icon-btn" href="#" id="scroll-top">Topo</a>
-    </nav>
-  </header>
-
-  <!-- hero -->
-  <div class="hero wrap" style="align-items:center">
-    <div class="left">
-      <h2>Game Zone — Contas de Blox Fruits</h2>
-      <p>Contas selecionadas, com God Human, CDK, Shark Anchor e muito mais. Clique no produto e fale com a gente no Direct do Instagram para comprar.</p>
-      <div class="cta" style="margin-top:12px">
-        <button class="primary cta-btn" onclick="document.getElementById('search').focus()" style="background:var(--accent);border:0;padding:10px 14px;border-radius:10px;color:#fff;font-weight:800">Ver produtos</button>
-      </div>
-    </div>
-    <div style="width:260px;text-align:right;color:var(--muted)">
-      <div style="font-weight:700;color:#fff">Atendimento</div>
-      <div>Direct no Instagram: <strong>@gamezone2897</strong></div>
-    </div>
+    <div style="width:260px;text-align:right"><button onclick="window.location.href='https://www.instagram.com/gamezone2897'" class="btn ig">Abrir Instagram</button></div>
   </div>
 
-  <!-- controls -->
-  <main class="wrap">
-    <div class="controls">
-      <input id="search" class="search" placeholder="Pesquisar produto (ex: level max, shark, god human, cdk)..." />
-      <div class="filters">
-        <div class="chip active" data-filter="all">Todos</div>
-        <div class="chip" data-filter="level">Level</div>
-        <div class="chip" data-filter="fruta">Frutas</div>
-        <div class="chip" data-filter="arma">Armas</div>
-        <div class="chip" data-filter="shark">Shark Anchor</div>
-      </div>
-    </div>
+  <input id="search" class="search" placeholder="Pesquisar produto (ex: level max, cdk, god human)">
 
-    <section class="grid" id="grid">
-      <!-- cards gerados por JS -->
-    </section>
-  </main>
+  <section class="grid" id="grid">
 
-  <!-- modal -->
-  <div class="modal-bg" id="modalBg">
-    <div class="modal">
-      <button class="close" id="modalClose">X</button>
-      <div class="left">
-        <img id="modalImg" src="" alt="produto" />
-      </div>
-      <div class="right">
-        <h3 id="modalTitle" style="color:var(--accent-2)"></h3>
-        <p id="modalDesc" style="color:var(--muted)"></p>
-        <p style="margin-top:12px"><strong>Preço:</strong> <span id="modalPrice">Consulte</span></p>
-        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-          <button id="buyIG" class="btn inst">Falar no Instagram (Direct)</button>
-          <button id="infoBtn" class="btn info">Pix / Info</button>
-          <button id="addCart" class="btn" style="background:linear-gradient(90deg,#ffb000,#ff8a00);color:#001">Adicionar ao carrinho</button>
+    <article class="card">
+      <img src="images/product_1_blue.png" alt="Conta Level Max">
+      <div class="info">
+        <h3>Conta Level Max</h3>
+        <p>Descrição rápida: conta pronta para jogar — consulte disponibilidade e entrega via Direct.</p>
+        <div class="row">
+          <div style="color:#8ef;font-weight:800">R$ 5,00</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ig" onclick="window.open('https://www.instagram.com/direct/t/gamezone2897','_blank')">Falar no Instagram</button>
+            <button class="btn" onclick="alert('Detalhes: ' + 'Conta Level Max')">Detalhes</button>
+          </div>
         </div>
       </div>
-      <div style="clear:both"></div>
-    </div>
-  </div>
-
-  <!-- cart quick -->
-  <div class="cart" id="cartBtn">Carrinho: <span id="cartTotal">0</span></div>
-
-  <footer>
-    © 2025 Game Zone • Vendas de contas Blox Fruits • Dúvidas e compras pelo Direct @gamezone2897
-  </footer>
-
-  <script>
-    /* =========================
-       Configuração do Instagram
-       ========================= */
-    const INSTAGRAM_DIRECT = "https://www.instagram.com/direct/t/gamezone2897";
-    const INSTAGRAM_PROFILE = "https://www.instagram.com/gamezone2897/";
-
-    const products = [
-      { id:'levelmax', name:'Conta Level Max', desc:'Conta com nível máximo pronta pra jogar. Vem com status e progressão concluída.', price:'Consulte', tag:'level', img:'https://i.imgur.com/sV8E6Hk.jpeg' },
-      { id:'mythic', name:'Conta com Mítica Aleatória', desc:'Conta com frutas místicas aleatórias — perfeita pra quem quer sorte nas frutas.', price:'Consulte', tag:'fruta', img:'https://i.imgur.com/dQlnJrR.jpeg' },
-      { id:'cdk', name:'Conta com CDK', desc:'Conta equipada com Cursed Dual Katana — ideal para PvP e farming.', price:'Consulte', tag:'arma', img:'https://i.imgur.com/2v6NY1U.jpeg' },
-      { id:'godh', name:'Conta Level Max + God Human', desc:'Conta full com God Human desbloqueado e domínio completo.', price:'Consulte', tag:'level', img:'https://i.imgur.com/tgS4k5p.jpeg' },
-      { id:'shark', name:'Conta com Shark Anchor', desc:'Conta com a lendária Shark Anchor — ideal para quem curte resistência e dano alto.', price:'Consulte', tag:'shark', img:'https://i.imgur.com/X7dzebQ.jpeg' },
-      { id:'permfruit', name:'Conta com Fruta Permanente Aleatória', desc:'Conta com frutas permanentes aleatórias — ótimo custo-benefício!', price:'Consulte', tag:'fruta', img:'https://i.imgur.com/0Hh1zKx.jpeg' },
-      { id:'randlevel', name:'Conta com Level Aleatório', desc:'Conta aleatória com progressos variados. Ideal pra quem quer começar com vantagem!', price:'Consulte', tag:'level', img:'https://i.imgur.com/nuhx5Cp.jpeg' },
-      { id:'godhuman_plus', name:'Level Max + God Human + Extras', desc:'Conta top com level max, God Human e itens extras.', price:'Consulte', tag:'level', img:'https://i.imgur.com/tgS4k5p.jpeg' }
-    ];
-
-    /* ============= DOM references ============= */
-    const grid = document.getElementById('grid');
-    const search = document.getElementById('search');
-    const modalBg = document.getElementById('modalBg');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalPrice = document.getElementById('modalPrice');
-    const buyIG = document.getElementById('buyIG');
-    const infoBtn = document.getElementById('infoBtn');
-    const addCart = document.getElementById('addCart');
-    const cartCount = document.getElementById('cart-count');
-    const cartTotal = document.getElementById('cartTotal');
-
-    let cart = [];
-
-    function renderProducts(list){
-      grid.innerHTML = '';
-      list.forEach(p=>{
-        const el = document.createElement('article');
-        el.className = 'card';
-        el.innerHTML = `
-          <img class="thumb" src="${p.img}" alt="${p.name}" />
-          <div class="card-body">
-            <h3>${p.name}</h3>
-            <p>${p.desc}</p>
-            <div class="meta">
-              <div class="price">${p.price}</div>
-              <div>
-                <button class="btn inst" data-id="${p.id}">Direct</button>
-                <button class="btn info" data-id="${p.id}">Pix / Info</button>
-                <button class="btn" data-id="${p.id}" style="background:linear-gradient(90deg,#ffb000,#ff8a00);color:#001">Detalhes</button>
-              </div>
-            </div>
+    </article>
+    
+    <article class="card">
+      <img src="images/product_2_purple.png" alt="Conta com Mítica Aleatória">
+      <div class="info">
+        <h3>Conta com Mítica Aleatória</h3>
+        <p>Descrição rápida: conta pronta para jogar — consulte disponibilidade e entrega via Direct.</p>
+        <div class="row">
+          <div style="color:#8ef;font-weight:800">R$ 10,00</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ig" onclick="window.open('https://www.instagram.com/direct/t/gamezone2897','_blank')">Falar no Instagram</button>
+            <button class="btn" onclick="alert('Detalhes: ' + 'Conta com Mítica Aleatória')">Detalhes</button>
           </div>
-        `;
-        grid.appendChild(el);
-      });
-    }
-
-    renderProducts(products);
-
-    /* search & filters */
-    search.addEventListener('input', ()=> {
-      const q = search.value.trim().toLowerCase();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
-      renderProducts(filtered);
-    });
-
-    document.querySelectorAll('.chip').forEach(ch=>{
-      ch.addEventListener('click', ()=>{
-        document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
-        ch.classList.add('active');
-        const f = ch.getAttribute('data-filter');
-        if(f === 'all') renderProducts(products);
-        else renderProducts(products.filter(p=>p.tag === f));
-      });
-    });
-
-    /* grid events (delegation) */
-    grid.addEventListener('click', (e)=>{
-      const btn = e.target.closest('button');
-      if(!btn) return;
-      const id = btn.getAttribute('data-id');
-      const p = products.find(x=>x.id === id);
-      if(!p) return;
-
-      if(btn.classList.contains('inst')){
-        openInstagram();
-      } else if(btn.classList.contains('info')){
-        alert(`Para comprar ${p.name}:\n\n1) Abra nosso Direct no Instagram.\n2) Informe qual conta quer e combinamos o pagamento (Pix/transfer).\n3) Após confirmação, enviamos os dados da conta.`);
-      } else {
-        openModal(p);
-      }
-    });
-
-    /* modal functions */
-    function openModal(p){
-      modalImg.src = p.img;
-      modalTitle.innerText = p.name;
-      modalDesc.innerText = p.desc;
-      modalPrice.innerText = p.price;
-      buyIG.onclick = openInstagram;
-      infoBtn.onclick = ()=> alert("Instruções:\n1) Abra nosso Direct no Instagram para combinar.\n2) Pagamento por Pix/transfer.\n3) Enviamos os dados após confirmação.");
-      addCart.onclick = ()=>{
-        cart.push(p);
-        updateCart();
-        alert(p.name + " adicionado ao carrinho.");
-      };
-      modalBg.style.display = 'flex';
-    }
-    document.getElementById('modalClose').onclick = ()=> modalBg.style.display = 'none';
-    modalBg.addEventListener('click', (e)=>{ if(e.target === modalBg) modalBg.style.display = 'none'; });
-
-    /* open instagram direct/profile */
-    function openInstagram(){
-      // nota: links diretos ao composer do direct podem não abrir em todos os dispositivos; abrimos o direct geral e o perfil como fallback
-      const direct = INSTAGRAM_DIRECT;
-      const profile = INSTAGRAM_PROFILE;
-      // primeiro tenta abrir direct; caso o navegador bloqueie, o usuário pode enviar DM pelo profile manualmente
-      window.open(direct, '_blank');
-      // também abre o perfil em nova aba (opcional, ajuda em alguns dispositivos)
-      // window.open(profile, '_blank');
-    }
-
-    /* cart */
-    function updateCart(){
-      cartCount.innerText = cart.length;
-      cartTotal.innerText = cart.length;
-    }
-    document.getElementById('cartBtn').onclick = ()=>{
-      if(cart.length === 0) return alert("Carrinho vazio. Adicione produtos pelo botão 'Detalhes'.");
-      let msg = "Tenho interesse nas seguintes contas:\n";
-      cart.forEach((c,i)=> msg += `${i+1}) ${c.name}\n`);
-      msg += "\nMe mostra preço e disponibilidade no Direct, por favor.";
-      // instrução para o usuário abrir direct manualmente (não é possível pré-preencher DM via link público)
-      alert("Abrindo o Direct do Instagram. Cole/mande a mensagem:\n\n" + msg);
-      openInstagram();
-    };
-    document.getElementById('show-cart').onclick = ()=> document.getElementById('cartBtn').click();
-
-    // scroll top
-    document.getElementById('scroll-top').addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
-
-    // placeholder para imagens quebradas
-    window.addEventListener('error', function(e){
-      if(e.target.tagName === 'IMG'){
-        e.target.src = 'https://i.imgur.com/3Gz8cQW.png';
-      }
-    }, true);
-  </script>
+        </div>
+      </div>
+    </article>
+    
+    <article class="card">
+      <img src="images/product_3_red.png" alt="Conta com CDK">
+      <div class="info">
+        <h3>Conta com CDK</h3>
+        <p>Descrição rápida: conta pronta para jogar — consulte disponibilidade e entrega via Direct.</p>
+        <div class="row">
+          <div style="color:#8ef;font-weight:800">R$ 15,00</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ig" onclick="window.open('https://www.instagram.com/direct/t/gamezone2897','_blank')">Falar no Instagram</button>
+            <button class="btn" onclick="alert('Detalhes: ' + 'Conta com CDK')">Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="card">
+      <img src="images/product_4_gold.png" alt="Conta Level Max + God Human">
+      <div class="info">
+        <h3>Conta Level Max + God Human</h3>
+        <p>Descrição rápida: conta pronta para jogar — consulte disponibilidade e entrega via Direct.</p>
+        <div class="row">
+          <div style="color:#8ef;font-weight:800">R$ 25,00</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ig" onclick="window.open('https://www.instagram.com/direct/t/gamezone2897','_blank')">Falar no Instagram</button>
+            <button class="btn" onclick="alert('Detalhes: ' + 'Conta Level Max + God Human')">Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="card">
+      <img src="images/product_5_teal.png" alt="Conta com Shark Anchor">
+      <div class="info">
+        <h3>Conta com Shark Anchor</h3>
+        <p>Descrição rápida: conta pronta para jogar — consulte disponibilidade e entrega via Direct.</p>
+        <div class="row">
+          <div style="color:#8ef;font-weight:800">R$ 30,00</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ig" onclick="window.open('https://www.instagram.com/direct/t/gamezone2897','_blank')">Falar no Instagram</button>
+            <button class="btn" onclick="alert('Detalhes: ' + 'Conta com Shark Anchor')">Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="card">
+      <img src="images/product_6_orange.png" alt="Conta com Fruta Permanente Aleatória">
+      <div class="info">
+        <h3>Conta com Fruta Permanente Aleatória</h3>
+        <p>Descrição rápida: conta pronta para jogar — consulte disponibilidade e entrega via Direct.</p>
+        <div class="row">
+          <div style="color:#8ef;font-weight:800">R$ 50,00</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ig" onclick="window.open('https://www.instagram.com/direct/t/gamezone2897','_blank')">Falar no Instagram</button>
+            <button class="btn" onclick="alert('Detalhes: ' + 'Conta com Fruta Permanente Aleatória')">Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="card">
+      <img src="images/product_7_green.png" alt="Conta com Level Aleatório">
+      <div class="info">
+        <h3>Conta com Level Aleatório</h3>
+        <p>Descrição rápida: conta pronta para jogar — consulte disponibilidade e entrega via Direct.</p>
+        <div class="row">
+          <div style="color:#8ef;font-weight:800">R$ 1,50</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ig" onclick="window.open('https://www.instagram.com/direct/t/gamezone2897','_blank')">Falar no Instagram</button>
+            <button class="btn" onclick="alert('Detalhes: ' + 'Conta com Level Aleatório')">Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <article class="card">
+      <img src="images/product_8_violet.png" alt="Level Max + God Human + Extras">
+      <div class="info">
+        <h3>Level Max + God Human + Extras</h3>
+        <p>Descrição rápida: conta pronta para jogar — consulte disponibilidade e entrega via Direct.</p>
+        <div class="row">
+          <div style="color:#8ef;font-weight:800">R$ 58,00</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn ig" onclick="window.open('https://www.instagram.com/direct/t/gamezone2897','_blank')">Falar no Instagram</button>
+            <button class="btn" onclick="alert('Detalhes: ' + 'Level Max + God Human + Extras')">Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </article>
+    
+  </section>
+</main>
+<footer class="footer">© 2025 Game Zone — Contas Blox Fruits • Vendas e dúvidas pelo Direct @gamezone2897</footer>
 </body>
 </html>
-```0
