@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Zona - Contas Blox Fruits</title>
+  <title>Game Zona — Contas Blox Fruits</title>
   <style>
     body {
-      background-color: #0a0f1a;
+      background-color: #0a0a0f;
       color: #fff;
       font-family: 'Poppins', sans-serif;
       margin: 0;
@@ -14,141 +14,183 @@
     }
 
     header {
-      background: linear-gradient(90deg, #001f3f, #003366);
-      text-align: center;
+      background: linear-gradient(90deg, #0077ff, #000);
       padding: 20px;
-      font-size: 28px;
-      font-weight: bold;
-      color: #00aaff;
-      text-shadow: 0 0 10px #00aaff;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.8;
     }
 
     .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 30px;
+      width: 90%;
+      margin: 20px auto;
     }
 
-    .card {
-      background-color: #111a2e;
-      border: 1px solid #003366;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 0 15px #003366;
-      transition: transform 0.3s, box-shadow 0.3s;
+    .product {
+      background-color: #12121a;
+      border: 1px solid #1f1f2e;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
     }
 
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #00aaff;
-    }
-
-    .card img {
+    .product img {
       width: 100%;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
+      height: 200px;
+      object-fit: cover;
     }
 
-    .card h3 {
+    .info {
+      padding: 15px;
+    }
+
+    .info h2 {
+      font-size: 18px;
       color: #00aaff;
-      margin: 10px 0 5px;
     }
 
-    .card p {
+    .info p {
       font-size: 14px;
-      color: #ddd;
-      padding: 0 10px 10px;
+      color: #ccc;
+      margin: 8px 0 12px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
     }
 
     .btn {
-      background-color: #00aaff;
-      color: #fff;
+      background: #00aaff;
+      color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 8px;
       cursor: pointer;
-      margin-bottom: 15px;
-      transition: 0.3s;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     .btn:hover {
-      background-color: #0077cc;
+      background: #0088cc;
     }
 
     footer {
-      background-color: #001f3f;
       text-align: center;
-      padding: 15px;
-      font-size: 14px;
-      color: #ccc;
-      margin-top: 30px;
+      padding: 20px;
+      font-size: 12px;
+      opacity: 0.7;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <header>🎮 Game Zona - Contas de Blox Fruits 🎮</header>
+
+  <header>
+    <h1>Game Zona — Contas Blox Fruits</h1>
+    <p>Contas confiáveis • Fale pelo WhatsApp para comprar</p>
+  </header>
 
   <div class="container">
-    <div class="card">
-      <img src="https://static.wikia.nocookie.net/blox-fruits/images/1/13/Godhuman.png" alt="God Human">
-      <h3>Conta Level Max + God Human</h3>
-      <p>Conta completa com God Human desbloqueado e status máximos!</p>
-      <button class="btn" onclick="comprar('Conta Level Max + God Human')">Comprar</button>
+
+    <div class="product">
+      <img src="https://i.imgur.com/sV8E6Hk.jpeg" alt="Conta Level Max">
+      <div class="info">
+        <h2>Conta Level Max</h2>
+        <p>Conta com nível máximo pronta pra jogar. Vem com status e progressão concluída.</p>
+        <div class="buttons">
+          <a href="#" class="btn">WhatsApp</a>
+          <a href="#" class="btn">Pix / Info</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="https://static.wikia.nocookie.net/blox-fruits/images/7/79/Cursed_Dual_Katana.png" alt="CDK">
-      <h3>Conta com CDK (Cursed Dual Katana)</h3>
-      <p>Conta poderosa com a lendária CDK equipada e pronta para PVP!</p>
-      <button class="btn" onclick="comprar('Conta com CDK')">Comprar</button>
+    <div class="product">
+      <img src="https://i.imgur.com/dQlnJrR.jpeg" alt="Conta com Mítica Aleatória">
+      <div class="info">
+        <h2>Conta com Mítica Aleatória</h2>
+        <p>Conta com frutas místicas aleatórias — perfeita pra quem quer sorte nas frutas.</p>
+        <div class="buttons">
+          <a href="#" class="btn">WhatsApp</a>
+          <a href="#" class="btn">Pix / Info</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="https://static.wikia.nocookie.net/blox-fruits/images/d/d9/MythicalFruit.png" alt="Fruta Mítica">
-      <h3>Conta com Fruta Mítica Aleatória</h3>
-      <p>Conta com frutas míticas selecionadas aleatoriamente. Raridade garantida!</p>
-      <button class="btn" onclick="comprar('Conta com Fruta Mítica Aleatória')">Comprar</button>
+    <div class="product">
+      <img src="https://i.imgur.com/2v6NY1U.jpeg" alt="Conta com CDK">
+      <div class="info">
+        <h2>Conta com CDK</h2>
+        <p>Conta equipada com Cursed Dual Katana — ideal para PvP e farming.</p>
+        <div class="buttons">
+          <a href="#" class="btn">WhatsApp</a>
+          <a href="#" class="btn">Pix / Info</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="https://static.wikia.nocookie.net/blox-fruits/images/a/a9/Shark_Anchor.png" alt="Shark Anchor">
-      <h3>Conta com Shark Anchor</h3>
-      <p>Conta exclusiva com a poderosa Shark Anchor e builds otimizadas.</p>
-      <button class="btn" onclick="comprar('Conta com Shark Anchor')">Comprar</button>
+    <div class="product">
+      <img src="https://i.imgur.com/tgS4k5p.jpeg" alt="Conta com God Human">
+      <div class="info">
+        <h2>Conta Level Max + God Human</h2>
+        <p>Conta full com estilo God Human desbloqueado e domínio completo.</p>
+        <div class="buttons">
+          <a href="#" class="btn">WhatsApp</a>
+          <a href="#" class="btn">Pix / Info</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="https://static.wikia.nocookie.net/blox-fruits/images/b/b3/FruitIcon.png" alt="Fruta Física Mítica">
-      <h3>Conta com Fruta Física Mítica</h3>
-      <p>Conta com frutas míticas físicas ideais para combates corpo a corpo.</p>
-      <button class="btn" onclick="comprar('Conta com Fruta Física Mítica')">Comprar</button>
+    <div class="product">
+      <img src="https://i.imgur.com/X7dzebQ.jpeg" alt="Conta com Shark Anchor">
+      <div class="info">
+        <h2>Conta com Shark Anchor</h2>
+        <p>Conta com a lendária Shark Anchor — ideal para quem curte resistência e dano alto.</p>
+        <div class="buttons">
+          <a href="#" class="btn">WhatsApp</a>
+          <a href="#" class="btn">Pix / Info</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="https://static.wikia.nocookie.net/blox-fruits/images/6/64/MaxLevel.png" alt="Level Max">
-      <h3>Conta Level Máximo</h3>
-      <p>Conta full upada com stats perfeitos para dominar qualquer servidor.</p>
-      <button class="btn" onclick="comprar('Conta Level Máximo')">Comprar</button>
+    <div class="product">
+      <img src="https://i.imgur.com/0Hh1zKx.jpeg" alt="Conta com Fruta Perm Aleatória">
+      <div class="info">
+        <h2>Conta com Fruta Permanente Aleatória</h2>
+        <p>Conta com frutas permanentes aleatórias — ótimo custo-benefício!</p>
+        <div class="buttons">
+          <a href="#" class="btn">WhatsApp</a>
+          <a href="#" class="btn">Pix / Info</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="https://static.wikia.nocookie.net/blox-fruits/images/5/55/RandomLevel.png" alt="Level Aleatório">
-      <h3>Conta com Level Aleatório</h3>
-      <p>Conta misteriosa com level e itens aleatórios. Pode vir uma surpresa!</p>
-      <button class="btn" onclick="comprar('Conta com Level Aleatório')">Comprar</button>
+    <div class="product">
+      <img src="https://i.imgur.com/nuhx5Cp.jpeg" alt="Conta com Level Aleatório">
+      <div class="info">
+        <h2>Conta com Level Aleatório</h2>
+        <p>Conta aleatória com progressos variados. Ideal pra quem quer começar com vantagem!</p>
+        <div class="buttons">
+          <a href="#" class="btn">WhatsApp</a>
+          <a href="#" class="btn">Pix / Info</a>
+        </div>
+      </div>
     </div>
+
   </div>
 
-  <footer>© 2025 Game Zona - Feito por João 😎</footer>
+  <footer>
+    © 2025 Game Zona — Todos os direitos reservados.
+  </footer>
 
-  <script>
-    const PHONE = "55SEUNUMEROAQUI"; // coloque seu número aqui ex: 5591999999999
-    function comprar(produto) {
-      const msg = `Olá! Tenho interesse em comprar: ${produto}`;
-      window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`);
-    }
-  </script>
 </body>
 </html>
